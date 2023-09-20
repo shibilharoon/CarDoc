@@ -10,9 +10,9 @@ class Basic extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "       B A S I C    S E R V I C E",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
           ),
-          backgroundColor: Colors.grey,
+          backgroundColor: Color.fromARGB(255, 36, 36, 36),
         ),
         body: Stack(
           children: [
@@ -44,10 +44,9 @@ class Basic extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(
-                                  color: Colors.black, // Shadow color
-                                  offset: Offset(2,
-                                      1), // Horizontal and vertical offset of the shadow
-                                  blurRadius: 2, // Radius of the shadow blur
+                                  color: Colors.black,
+                                  offset: Offset(2, 1),
+                                  blurRadius: 2,
                                 ),
                               ],
                             ),
@@ -59,10 +58,9 @@ class Basic extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(
-                                  color: Colors.black, // Shadow color
-                                  offset: Offset(1,
-                                      1), // Horizontal and vertical offset of the shadow
-                                  blurRadius: 1, // Radius of the shadow blur
+                                  color: Colors.black,
+                                  offset: Offset(1, 1),
+                                  blurRadius: 1,
                                 ),
                               ],
                             ),
@@ -86,7 +84,8 @@ class Basic extends StatelessWidget {
               children: [
                 Container(
                   child: Column(
-                    children: [SizedBox(
+                    children: [
+                      SizedBox(
                         height: 40,
                       ),
                       Container(
@@ -104,7 +103,8 @@ class Basic extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30)),
-                      )],
+                      )
+                    ],
                   ),
                   height: 380,
                   width: 400,

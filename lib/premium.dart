@@ -10,9 +10,9 @@ class Premium extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "   P R E M I U M    S E R V I C E",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
           ),
-          backgroundColor: Colors.grey,
+          backgroundColor: Color.fromARGB(255, 36, 36, 36),
         ),
         body: Stack(
           children: [
@@ -86,7 +86,8 @@ class Premium extends StatelessWidget {
               children: [
                 Container(
                   child: Column(
-                    children: [SizedBox(
+                    children: [
+                      SizedBox(
                         height: 40,
                       ),
                       Container(
@@ -104,7 +105,47 @@ class Premium extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30)),
-                      )],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Oil   Filter  Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Air Filter Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      Text(
+                        " > Engine Oil Replacement",
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
                   ),
                   height: 380,
                   width: 400,

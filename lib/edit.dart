@@ -1,19 +1,18 @@
-import 'package:cardoc/list.dart';
 import 'package:flutter/material.dart';
 
-class AddCustomer extends StatefulWidget {
-  const AddCustomer({super.key});
+class EditScreen extends StatefulWidget {
+  const EditScreen({super.key});
 
   @override
-  State<AddCustomer> createState() => _AddCustomerState();
+  State<EditScreen> createState() => _EditScreenState();
 }
 
-class _AddCustomerState extends State<AddCustomer> {
+class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("           R E G I S T E R"),
+        title: Text("           E D I T"),
         backgroundColor: Color.fromARGB(255, 36, 36, 36),
       ),
       body: Stack(
@@ -59,11 +58,7 @@ class _AddCustomerState extends State<AddCustomer> {
                   SizedBox(height: 10),
                   addcustomer(text1: "Model"),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => List(),
-                      ));
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       primary: Color.fromARGB(255, 179, 24, 24),
                     ),

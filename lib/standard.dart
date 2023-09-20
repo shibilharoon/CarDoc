@@ -10,9 +10,9 @@ class Standard extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             " S T A N D A R D    S E R V I C E",
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: const Color.fromARGB(255, 255, 255, 255)),
           ),
-          backgroundColor: Colors.grey,
+          backgroundColor: Color.fromARGB(255, 36, 36, 36),
         ),
         body: Stack(
           children: [
