@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Profile extends StatelessWidget {
   final name;
@@ -29,8 +32,8 @@ class Profile extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 40),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
                 child: Text(
                   "CARDOC",
                   style: TextStyle(
@@ -43,7 +46,7 @@ class Profile extends StatelessWidget {
                 "Premium And Prestige Car Service",
                 style: TextStyle(color: Color.fromARGB(255, 63, 63, 63)),
               ),
-              SizedBox(
+              Container(
                 width: 300,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 40),
@@ -99,10 +102,8 @@ class CardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor =
-        isAlternate ? Colors.white : const Color.fromARGB(255, 0, 0, 0);
-    final textColor =
-        isAlternate ? const Color.fromARGB(255, 0, 0, 0) : Colors.white;
+    final bgColor = isAlternate ? Colors.white : Color.fromARGB(255, 0, 0, 0);
+    final textColor = isAlternate ? Color.fromARGB(255, 0, 0, 0) : Colors.white;
 
     return Card(
       elevation: 5,
@@ -111,7 +112,7 @@ class CardItem extends StatelessWidget {
       ),
       color: bgColor,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: EdgeInsets.all(20),
         width: double.infinity,
         height: 90,
         child: Column(
@@ -125,7 +126,7 @@ class CardItem extends StatelessWidget {
                 color: textColor,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             Text(
               content,
               style: TextStyle(

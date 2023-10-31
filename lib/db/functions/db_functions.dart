@@ -34,10 +34,3 @@ Future<void> editCustomer(index, CustomerModel value) async {
 
   getAllCustomers();
 }
-
-calculateRevenue(List<CustomerModel> customers) {
-  double amount = 0;
-  for (var customer in customers) {
-    amount += double.parse(customer.amount!);
-  }return amount;
-}

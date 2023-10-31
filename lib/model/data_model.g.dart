@@ -22,14 +22,13 @@ class CustomerModelAdapter extends TypeAdapter<CustomerModel> {
       date: fields[2] as String?,
       carNumber: fields[3] as String?,
       carModel: fields[4] as String?,
-      amount: fields[5] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, CustomerModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -39,9 +38,7 @@ class CustomerModelAdapter extends TypeAdapter<CustomerModel> {
       ..writeByte(3)
       ..write(obj.carNumber)
       ..writeByte(4)
-      ..write(obj.carModel)
-      ..writeByte(5)
-      ..write(obj.amount);
+      ..write(obj.carModel);
   }
 
   @override

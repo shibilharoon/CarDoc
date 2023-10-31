@@ -1,6 +1,6 @@
-import 'package:cardoc/view/basic.dart';
-import 'package:cardoc/view/premium.dart';
-import 'package:cardoc/view/standard.dart';
+import 'package:cardoc/screens/basic.dart';
+import 'package:cardoc/screens/premium.dart';
+import 'package:cardoc/screens/standard.dart';
 
 import 'package:flutter/material.dart';
 

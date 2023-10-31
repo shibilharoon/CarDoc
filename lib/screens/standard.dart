@@ -1,3 +1,5 @@
+import 'package:cardoc/screens/add_customer.dart';
+import 'package:cardoc/screens/list.dart';
 import 'package:flutter/material.dart';
 
 class Standard extends StatelessWidget {
@@ -13,7 +15,7 @@ class Standard extends StatelessWidget {
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
           ),
           backgroundColor: const Color.fromARGB(255, 36, 36, 36),
-          actions: const [],
+          actions: [],
         ),
         body: Stack(
           children: [
@@ -97,11 +99,6 @@ class Standard extends StatelessWidget {
                           height: 40,
                         ),
                         Container(
-                          height: 40,
-                          width: 300,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30)),
                           child: const Center(
                             child: Text(
                               "What Includes?",
@@ -111,66 +108,73 @@ class Standard extends StatelessWidget {
                                   fontSize: 20),
                             ),
                           ),
+                          height: 40,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30)),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        const Column(
-                          children: [
-                            Text(
-                              " > Engine Oil Replacement",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Oil   Filter  Replacement",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Air Filter    Replacement",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Coolant Top Up(200ml)",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Heater /Spark plugs checking",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Battery water topup",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Car wash",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Interior vaccuming",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Wheel balancing",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            Text(
-                              " > Wheel alignment",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 20),
-                            ),
-                            SizedBox(
-                              height: 50,
-                            )
-                          ],
+                        Container(
+                          child: const Column(
+                            children: [
+                              Text(
+                                " > Engine Oil Replacement",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Oil   Filter  Replacement",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Air Filter    Replacement",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Coolant Top Up(200ml)",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Heater /Spark plugs checking",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Battery water topup",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Car wash",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Interior vaccuming",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Wheel balancing",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              Text(
+                                " > Wheel alignment",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: 50,
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

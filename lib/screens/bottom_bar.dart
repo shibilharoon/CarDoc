@@ -1,7 +1,9 @@
-import 'package:cardoc/view/add_customer.dart';
-import 'package:cardoc/view/list.dart';
-import 'package:cardoc/view/packages.dart';
-import 'package:cardoc/view/settings.dart';
+import 'package:cardoc/db/functions/db_functions.dart';
+import 'package:cardoc/screens/add_customer.dart';
+import 'package:cardoc/screens/home_screen.dart';
+import 'package:cardoc/screens/list.dart';
+import 'package:cardoc/screens/packages.dart';
+import 'package:cardoc/screens/settings.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -15,28 +17,28 @@ class _BottomBarState extends State<BottomBar> {
   int _currentInex = 0;
 
   final List<Widget> _screens = [
-    const Packages(),
-    const AddCustomer(),
-    const ListPage(),
-    const SettingsScreen()
+    Packages(),
+    AddCustomer(),
+    ListPage(),
+    settingsScreen()
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: _currentInex, children: _screens),
+      body: _screens[_currentInex],
       bottomNavigationBar: Container(
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color.fromARGB(255, 107, 14, 14),
-          unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.white,
           currentIndex: _currentInex,
-          backgroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 106, 21, 21),
           onTap: (index) {
             setState(() {
               _currentInex = index;
             });
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_add_rounded), label: ''),
