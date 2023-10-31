@@ -13,11 +13,14 @@ class CustomerModel {
   final String? carNumber;
   @HiveField(4)
   final String? carModel;
+  @HiveField(5)
+  final String? amount;
 
   CustomerModel(
       {required this.name,
       required this.phone,
       required this.date,
       required this.carNumber,
-      required this.carModel});
+      required this.carModel,
+      required this.amount});
 }

@@ -1,7 +1,11 @@
-import 'package:cardoc/db/functions/db_functions.dart';
-import 'package:cardoc/model/data_model.dart';
-import 'package:cardoc/screens/list.dart';
+
+
+
+
+import 'package:cardoc/controllers/db_functions.dart';import 'package:cardoc/model/data_model.dart';
+import 'package:cardoc/view/list.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EditScreen extends StatefulWidget {
   final name;
@@ -9,15 +13,18 @@ class EditScreen extends StatefulWidget {
   final date;
   final carnumber;
   final carmodel;
+  final amount;
   int index;
 
   EditScreen(
-      {required this.index,
+      {super.key,
+      required this.index,
       required this.name,
       required this.phone,
       required this.date,
       required this.carmodel,
-      required this.carnumber});
+      required this.carnumber,
+      required this.amount});
 
   @override
   State<EditScreen> createState() => _EditScreenState();
@@ -29,6 +36,9 @@ class _EditScreenState extends State<EditScreen> {
   TextEditingController _dateController = TextEditingController();
   TextEditingController _carNumberController = TextEditingController();
   TextEditingController _carModelController = TextEditingController();
+  TextEditingController _amountController = TextEditingController();
+  DateTime? _selectedDate;
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +47,7 @@ class _EditScreenState extends State<EditScreen> {
     _dateController = TextEditingController(text: widget.date);
     _carNumberController = TextEditingController(text: widget.carnumber);
     _carModelController = TextEditingController(text: widget.carmodel);
+    _amountController = TextEditingController(text: widget.amount);
   }
 
   @override
@@ -45,8 +56,8 @@ class _EditScreenState extends State<EditScreen> {
       appBar: AppBar(
         title: const Text(
           "E D I T",
-          textAlign: TextAlign.center,
         ),
+        centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 36, 36, 36),
       ),
       body: Stack(
@@ -93,23 +104,55 @@ class _EditScreenState extends State<EditScreen> {
                     style: TextStyle(color: Color.fromARGB(255, 63, 63, 63)),
                   ),
                   const SizedBox(height: 50),
-                  editcustomer(text1: "Name", controller: _nameController),
-                  const SizedBox(height: 10),
-                  editcustomer(text1: "Phone", controller: _phoneController),
-                  const SizedBox(height: 10),
-                  editcustomer(text1: "Package", controller: _dateController),
+                  editcustomer(
+                    text1: "Name",
+                    controller: _nameController,
+                    icon: Icons.person,
+                  ),
                   const SizedBox(height: 10),
                   editcustomer(
-                      text1: "Car No", controller: _carNumberController),
+                      text1: "Phone",
+                      controller: _phoneController,
+                      icon: Icons.phone),
                   const SizedBox(height: 10),
-                  editcustomer(text1: "Model", controller: _carModelController),
+                  InkWell(
+                    onTap: () {
+                      _showDatePicker(context);
+                    },
+                    child: IgnorePointer(
+                      child: editcustomer(
+                        text1: "Date",
+                        controller: TextEditingController(
+                          text: _selectedDate != null
+                              ? DateFormat("MM/dd/yyyy").format(_selectedDate!)
+                              : "",
+                        ),
+                        icon: Icons.calendar_today,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  editcustomer(
+                      text1: "Car No",
+                      controller: _carNumberController,
+                      icon: Icons.directions_car),
+                  const SizedBox(height: 10),
+                  editcustomer(
+                      text1: "Model",
+                      controller: _carModelController,
+                      icon: Icons.car_rental),
+                  const SizedBox(height: 10),
+                  editcustomer(
+                      text1: "Amount",
+                      controller: _amountController,
+                      icon: Icons.car_rental),
                   ElevatedButton(
                     onPressed: () => editCustomerButton(context),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 179, 24, 24),
                     ),
                     child: const Icon(
-                      Icons.done,
+                      Icons.done_all_rounded,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
                   ),
@@ -122,26 +165,48 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  TextFormField editcustomer(
-      {required String text1, required TextEditingController controller}) {
+  void _showDatePicker(BuildContext context) async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2040),
+    );
+
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDate = pickedDate;
+        _dateController.text = DateFormat("MM/dd/yyyy").format(pickedDate);
+      });
+    }
+  }
+
+  TextFormField editcustomer({
+    required String text1,
+    required TextEditingController controller,
+    required IconData icon,
+  }) {
     return TextFormField(
       controller: controller,
       style: const TextStyle(
           height: .7, color: Color.fromARGB(255, 255, 255, 255)),
       decoration: InputDecoration(
-        labelText: text1,
-        labelStyle: const TextStyle(
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
-        ),
-        fillColor: const Color.fromARGB(224, 0, 0, 0),
-        filled: true,
-      ),
+          hintText: text1,
+          hintStyle: const TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Color.fromARGB(255, 255, 255, 255)),
+          ),
+          fillColor: const Color.fromARGB(224, 0, 0, 0),
+          filled: true,
+          prefixIcon: Icon(
+            icon,
+            color: Colors.white,
+          )),
     );
   }
 
@@ -151,23 +216,30 @@ class _EditScreenState extends State<EditScreen> {
     final date1 = _dateController.text.trim();
     final carNo1 = _carNumberController.text.trim();
     final carModel1 = _carModelController.text.trim();
+    final amount1 = _amountController.text.trim();
+
     if (name1.isEmpty ||
         phone1.isEmpty ||
         date1.isEmpty ||
         carNo1.isEmpty ||
-        carModel1.isEmpty) {
+        carModel1.isEmpty||
+        amount1.isEmpty
+        ) {
       return;
     }
 
     final update = CustomerModel(
-        name: name1,
-        phone: phone1,
-        date: date1,
-        carNumber: carNo1,
-        carModel: carModel1);
+      name: name1,
+      phone: phone1,
+      date: date1,
+      carNumber: carNo1,
+      carModel: carModel1,
+      amount: amount1,
+      
+    );
     editCustomer(widget.index, update);
     Navigator.of(context).pop(MaterialPageRoute(
-      builder: (context) => ListPage(),
+      builder: (context) => const ListPage(),
     ));
   }
 }
