@@ -14,7 +14,7 @@ class Premium extends StatelessWidget {
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
           ),
           backgroundColor: const Color.fromARGB(255, 36, 36, 36),
-          actions: [
+          actions: const [
            
           ],
         ),
@@ -23,11 +23,9 @@ class Premium extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 60),
-                    child: Image.asset("assets/images/image 33.png"),
-                  ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 60),
+                  child: Image.asset("assets/images/image 33.png"),
                 ),
               ],
             ),
@@ -55,10 +53,10 @@ class Premium extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(
-                                  color: Colors.black, // Shadow color
+                                  color: Colors.black,
                                   offset: Offset(2,
-                                      1), // Horizontal and vertical offset of the shadow
-                                  blurRadius: 2, // Radius of the shadow blur
+                                      1), 
+                                  blurRadius: 2,
                                 ),
                               ],
                             ),
@@ -70,10 +68,10 @@ class Premium extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                               shadows: [
                                 Shadow(
-                                  color: Colors.black, // Shadow color
+                                  color: Colors.black,
                                   offset: Offset(1,
-                                      1), // Horizontal and vertical offset of the shadow
-                                  blurRadius: 1, // Radius of the shadow blur
+                                      1),
+                                  blurRadius: 1, 
                                 ),
                               ],
                             ),
@@ -104,6 +102,11 @@ class Premium extends StatelessWidget {
                           height: 40,
                         ),
                         Container(
+                          height: 40,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30)),
                           child: const Center(
                             child: Text(
                               "What Includes?",
@@ -113,93 +116,86 @@ class Premium extends StatelessWidget {
                                   fontSize: 20),
                             ),
                           ),
-                          height: 40,
-                          width: 300,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30)),
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        Container(
-                          child: const Column(
-                            children: [
-                              Text(
-                                " > Engine Oil Replacement",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Oil   Filter  Replacement",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Air Filter    Replacement",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Coolant Top Up(200ml)",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Heater /Spark plugs checking",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Brake fluid top up",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Throttle body cleaning",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Gear oil top up",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Car Scanning",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Interior vaccuming",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Wheel balancing",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Wheel alignment",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Tyre rotation",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              Text(
-                                " > Car wash",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              SizedBox(
-                                height: 50,
-                              )
-                            ],
-                          ),
+                        const Column(
+                          children: [
+                            Text(
+                              " > Engine Oil Replacement",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Oil   Filter  Replacement",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Air Filter    Replacement",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Coolant Top Up(200ml)",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Heater /Spark plugs checking",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Brake fluid top up",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Throttle body cleaning",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Gear oil top up",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Car Scanning",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Interior vaccuming",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Wheel balancing",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Wheel alignment",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Tyre rotation",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            Text(
+                              " > Car wash",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
+                            ),
+                            SizedBox(
+                              height: 50,
+                            )
+                          ],
                         )
                       ],
                     ),
