@@ -1,7 +1,9 @@
+import 'package:cardoc/controllers/db_functions.dart';
 import 'package:cardoc/model/data_model.dart';
 import 'package:cardoc/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -21,9 +23,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home:ScreenSplash(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => DbProvider(),)],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home:ScreenSplash(),
+      ),
     );
   }
 }

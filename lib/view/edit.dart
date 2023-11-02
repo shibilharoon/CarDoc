@@ -6,6 +6,7 @@ import 'package:cardoc/controllers/db_functions.dart';import 'package:cardoc/mod
 import 'package:cardoc/view/list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EditScreen extends StatefulWidget {
   final name;
@@ -211,6 +212,7 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   editCustomerButton(BuildContext context) async {
+    final db = Provider.of<DbProvider>(context);
     final name1 = _nameController.text.trim();
     final phone1 = _phoneController.text.trim();
     final date1 = _dateController.text.trim();
@@ -237,7 +239,7 @@ class _EditScreenState extends State<EditScreen> {
       amount: amount1,
       
     );
-    editCustomer(widget.index, update);
+    db.editCustomer(widget.index, update);
     Navigator.of(context).pop(MaterialPageRoute(
       builder: (context) => const ListPage(),
     ));

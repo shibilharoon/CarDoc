@@ -3,6 +3,7 @@ import 'package:cardoc/model/data_model.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddCustomer extends StatefulWidget {
   const AddCustomer({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class AddCustomer extends StatefulWidget {
 }
 
 class _AddCustomerState extends State<AddCustomer> {
+  
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _carNumberController = TextEditingController();
@@ -210,6 +212,7 @@ class _AddCustomerState extends State<AddCustomer> {
   }
 
   Future<void> addCustomerButton(BuildContext context) async {
+    final db = Provider.of<DbProvider>(context,listen: false);
     final newname = _nameController.text.trim();
     final newphone = _phoneController.text.trim();
     final newdate = _dateController.text.trim();
@@ -224,7 +227,7 @@ class _AddCustomerState extends State<AddCustomer> {
         newAmount.isEmpty) {
       return;
     }
-    final isDuplicate = CustomerListNotifier.value.any(
+    final isDuplicate = db.customerList.any(
         (customer) => customer.name == newname || customer.phone == newphone);
     if (isDuplicate) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -243,7 +246,7 @@ class _AddCustomerState extends State<AddCustomer> {
         carNumber: newcarNo,
         carModel: newcarModel,
         amount: newAmount);
-    addCustomers(newcustomer);
+    db.addCustomers(newcustomer);
   }
 
   void _refreshScreen() {

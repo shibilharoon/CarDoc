@@ -1,9 +1,11 @@
 import 'dart:async';
-import 'package:cardoc/controllers/db_functions.dart';import 'package:cardoc/model/data_model.dart';
+import 'package:cardoc/controllers/db_functions.dart';
+import 'package:cardoc/model/data_model.dart';
 import 'package:cardoc/view/edit.dart';
 import 'package:cardoc/view/pie_chart.dart';
 import 'package:cardoc/view/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -14,30 +16,33 @@ class ListPage extends StatefulWidget {
 
 class _ListPageState extends State<ListPage> {
   TextEditingController searchController = TextEditingController();
-  List<CustomerModel> filteredCustomerList = [];
+
   Map<int, Color> tileColors = {};
   Map<int, bool> completionStatus = {};
 
+  // @override
+  // void initState() {
+  //     final db = Provider.of<DbProvider>(context,listen: false);
+  //   super.initState();
+  //   db.getAllCustomers();
+  // }
+
   @override
-  void initState() {
-    super.initState();
-    getAllCustomers();
+  void didChangeDependencies() {
+    Provider.of<DbProvider>(context, listen: false).getAllCustomers();
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
   }
 
   void filterCustomers(String query) {
-    setState(() {
-      filteredCustomerList = CustomerListNotifier.value
-          .where((customer) =>
-              customer.name!.toLowerCase().contains(query.toLowerCase()) ||
-              customer.phone!.contains(query))
-          .toList();
-    });
+    Provider.of<DbProvider>(context, listen: false).filterCustomer(query);
   }
 
   void _showDeleteConfirmationDialog(int index) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final db = Provider.of<DbProvider>(context, listen: false);
         return AlertDialog(
           title: const Text('Delete Customer'),
           content: const Text('Are you sure you want to delete this customer?'),
@@ -55,7 +60,7 @@ class _ListPageState extends State<ListPage> {
             ),
             TextButton(
               onPressed: () {
-                deleteCustomer(index);
+                db.deleteCustomer(index);
                 Navigator.of(context).pop();
               },
               child: const Text(
@@ -82,6 +87,7 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<DbProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("LIST"),
@@ -125,15 +131,13 @@ class _ListPageState extends State<ListPage> {
             ),
           ),
           Flexible(
-            child: ValueListenableBuilder(
-              valueListenable: CustomerListNotifier,
-              builder: (BuildContext ctx, List<CustomerModel> customerList,
-                  Widget? child) {
+            child: Consumer(
+              builder: (context, value, child) {
                 return ListView.separated(
                   itemBuilder: (ctx, index) {
-                    final data = filteredCustomerList.isNotEmpty
-                        ? filteredCustomerList[index]
-                        : customerList[index];
+                    final data = db.filteredCustomerList.isNotEmpty
+                        ? db.filteredCustomerList[index]
+                        : db.customerList[index];
 
                     return GestureDetector(
                       onTap: () {
@@ -218,9 +222,9 @@ class _ListPageState extends State<ListPage> {
                   separatorBuilder: (ctx, index) {
                     return const Divider();
                   },
-                  itemCount: filteredCustomerList.isNotEmpty
-                      ? filteredCustomerList.length
-                      : customerList.length,
+                  itemCount: db.filteredCustomerList.isNotEmpty
+                      ? db.filteredCustomerList.length
+                      : db.customerList.length,
                 );
               },
             ),

@@ -1,7 +1,9 @@
 import 'dart:math';
-import 'package:cardoc/controllers/db_functions.dart';import 'package:cardoc/model/data_model.dart';
+import 'package:cardoc/controllers/db_functions.dart';
+import 'package:cardoc/model/data_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PieChartPage extends StatefulWidget {
   const PieChartPage({Key? key});
@@ -13,11 +15,12 @@ class PieChartPage extends StatefulWidget {
 class _PieChartPageState extends State<PieChartPage> {
   @override
   Widget build(BuildContext context) {
-    List<CustomerModel> customer = CustomerListNotifier.value;
-    double totalRevenue = calculateRevenue(customer);
+    final db = Provider.of<DbProvider>(context);
+    List<CustomerModel> customer = db.customerList;
+    double totalRevenue = db.calculateRevenue(customer);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("PIE CHART"),
         centerTitle: true,
@@ -31,7 +34,7 @@ class _PieChartPageState extends State<PieChartPage> {
             ),
             Visibility(
               visible: customer.isNotEmpty,
-              replacement: Center(
+              replacement: const Center(
                 child: Text("There is no list added",
                     style: TextStyle(color: Colors.white)),
               ),

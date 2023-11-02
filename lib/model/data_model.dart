@@ -15,6 +15,8 @@ class CustomerModel {
   final String? carModel;
   @HiveField(5)
   final String? amount;
+  @HiveField(6)
+  
 
   CustomerModel(
       {required this.name,
