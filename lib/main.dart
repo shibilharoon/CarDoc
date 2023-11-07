@@ -1,4 +1,6 @@
-import 'package:cardoc/controllers/db_functions.dart';
+import 'package:cardoc/controllers/date_provider.dart';
+import 'package:cardoc/controllers/db_provider.dart';
+import 'package:cardoc/controllers/page_provider.dart';
 import 'package:cardoc/model/data_model.dart';
 import 'package:cardoc/view/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +26,18 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => DbProvider(),)],
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => DbProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => pageProvider(),
+        ),
+        ChangeNotifierProvider(create: (context) => DateProvider(),)
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home:ScreenSplash(),
+        home: ScreenSplash(),
       ),
     );
   }

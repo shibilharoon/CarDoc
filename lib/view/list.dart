@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:cardoc/controllers/db_functions.dart';
-import 'package:cardoc/model/data_model.dart';
+import 'package:cardoc/controllers/db_provider.dart';
+
 import 'package:cardoc/view/edit.dart';
 import 'package:cardoc/view/pie_chart.dart';
 import 'package:cardoc/view/profile.dart';
@@ -19,19 +19,10 @@ class _ListPageState extends State<ListPage> {
 
   Map<int, Color> tileColors = {};
   Map<int, bool> completionStatus = {};
-
-  // @override
-  // void initState() {
-  //     final db = Provider.of<DbProvider>(context,listen: false);
-  //   super.initState();
-  //   db.getAllCustomers();
-  // }
-
   @override
-  void didChangeDependencies() {
+  void initState() {
     Provider.of<DbProvider>(context, listen: false).getAllCustomers();
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
+    super.initState();
   }
 
   void filterCustomers(String query) {
@@ -82,7 +73,6 @@ class _ListPageState extends State<ListPage> {
 
     tileColors[index] = const Color.fromARGB(255, 243, 33, 33);
     completionStatus[index] = true;
-    setState(() {});
   }
 
   @override
@@ -97,7 +87,7 @@ class _ListPageState extends State<ListPage> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => PieChartPage(),
+                  builder: (context) => const PieChartPage(),
                 ));
               },
               icon: const Icon(Icons.bar_chart_rounded))

@@ -1,4 +1,4 @@
-// ignore_for_file: sort_child_properties_last
+
 
 
 import 'package:flutter/material.dart';
@@ -102,6 +102,11 @@ class Basic extends StatelessWidget {
                           height: 40,
                         ),
                         Container(
+                          height: 40,
+                          width: 300,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(30)),
                           child: const Center(
                             child: Text(
                               "What Includes?",
@@ -111,11 +116,6 @@ class Basic extends StatelessWidget {
                                   fontSize: 20),
                             ),
                           ),
-                          height: 40,
-                          width: 300,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30)),
                         ),
                         const SizedBox(
                           height: 30,

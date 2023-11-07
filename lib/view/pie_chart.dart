@@ -1,21 +1,16 @@
 import 'dart:math';
-import 'package:cardoc/controllers/db_functions.dart';
+import 'package:cardoc/controllers/db_provider.dart';
 import 'package:cardoc/model/data_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PieChartPage extends StatefulWidget {
+class PieChartPage extends StatelessWidget {
   const PieChartPage({Key? key});
 
   @override
-  State<PieChartPage> createState() => _PieChartPageState();
-}
-
-class _PieChartPageState extends State<PieChartPage> {
-  @override
   Widget build(BuildContext context) {
-    final db = Provider.of<DbProvider>(context);
+    final db = Provider.of<DbProvider>(context, listen: false);
     List<CustomerModel> customer = db.customerList;
     double totalRevenue = db.calculateRevenue(customer);
 

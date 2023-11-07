@@ -1,26 +1,22 @@
-import 'package:cardoc/controllers/db_functions.dart';
+import 'package:cardoc/controllers/date_provider.dart';
+import 'package:cardoc/controllers/db_provider.dart';
 import 'package:cardoc/model/data_model.dart';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddCustomer extends StatefulWidget {
-  const AddCustomer({Key? key}) : super(key: key);
+class AddCustomer extends StatelessWidget {
+  AddCustomer({Key? key}) : super(key: key);
 
-  @override
-  State<AddCustomer> createState() => _AddCustomerState();
-}
-
-class _AddCustomerState extends State<AddCustomer> {
-  
   final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _phoneController = TextEditingController();
+
   final TextEditingController _carNumberController = TextEditingController();
+
   final TextEditingController _carModelController = TextEditingController();
-  final TextEditingController _dateController = TextEditingController();
+
   final TextEditingController _amountController = TextEditingController();
-  DateTime? _selectedDate;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -35,7 +31,7 @@ class _AddCustomerState extends State<AddCustomer> {
         actions: [
           IconButton(
             onPressed: () {
-              _refreshScreen();
+              _refreshScreen(context);
             },
             icon: const Icon(Icons.refresh),
           )
@@ -102,17 +98,15 @@ class _AddCustomerState extends State<AddCustomer> {
                     const SizedBox(height: 10),
                     InkWell(
                       onTap: () {
-                        _showDatePicker(context);
+                        Provider.of<DateProvider>(context, listen: false)
+                            .showDatePickers(context);
                       },
                       child: IgnorePointer(
                         child: addCustomer(
                           text1: "Date",
-                          controller: TextEditingController(
-                            text: _selectedDate != null
-                                ? DateFormat("MM/dd/yyyy")
-                                    .format(_selectedDate!)
-                                : "",
-                          ),
+                          controller:
+                              Provider.of<DateProvider>(context, listen: false)
+                                  .fromDateContoller,
                           icon: Icons.calendar_today,
                         ),
                       ),
@@ -159,22 +153,6 @@ class _AddCustomerState extends State<AddCustomer> {
     );
   }
 
-  void _showDatePicker(BuildContext context) async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2040),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _selectedDate = pickedDate;
-        _dateController.text = DateFormat("MM/dd/yyyy").format(pickedDate);
-      });
-    }
-  }
-
   TextFormField addCustomer(
       {required String text1,
       required TextEditingController controller,
@@ -212,10 +190,13 @@ class _AddCustomerState extends State<AddCustomer> {
   }
 
   Future<void> addCustomerButton(BuildContext context) async {
-    final db = Provider.of<DbProvider>(context,listen: false);
+    final db = Provider.of<DbProvider>(context, listen: false);
     final newname = _nameController.text.trim();
     final newphone = _phoneController.text.trim();
-    final newdate = _dateController.text.trim();
+    final newdate = Provider.of<DateProvider>(context, listen: false)
+        .fromDateContoller
+        .text
+        .trim();
     final newcarNo = _carNumberController.text.trim();
     final newcarModel = _carModelController.text.trim();
     final newAmount = _amountController.text.trim();
@@ -249,10 +230,10 @@ class _AddCustomerState extends State<AddCustomer> {
     db.addCustomers(newcustomer);
   }
 
-  void _refreshScreen() {
+  void _refreshScreen(context) {
     _nameController.clear();
     _phoneController.clear();
-    _dateController.clear();
+    Provider.of<DateProvider>(context, listen: false).fromDateContoller.clear();
     _carModelController.clear();
     _carNumberController.clear();
     _amountController.clear();

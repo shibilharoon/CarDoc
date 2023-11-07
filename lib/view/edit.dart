@@ -1,14 +1,12 @@
-
-
-
-
-import 'package:cardoc/controllers/db_functions.dart';import 'package:cardoc/model/data_model.dart';
+import 'package:cardoc/controllers/date_provider.dart';
+import 'package:cardoc/controllers/db_provider.dart';
+import 'package:cardoc/model/data_model.dart';
 import 'package:cardoc/view/list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class EditScreen extends StatefulWidget {
+class EditScreen extends StatelessWidget {
   final name;
   final phone;
   final date;
@@ -27,32 +25,29 @@ class EditScreen extends StatefulWidget {
       required this.carnumber,
       required this.amount});
 
-  @override
-  State<EditScreen> createState() => _EditScreenState();
-}
-
-class _EditScreenState extends State<EditScreen> {
   TextEditingController _nameController = TextEditingController();
+
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _dateController = TextEditingController();
+
   TextEditingController _carNumberController = TextEditingController();
+
   TextEditingController _carModelController = TextEditingController();
+
   TextEditingController _amountController = TextEditingController();
+
   DateTime? _selectedDate;
 
   @override
-  void initState() {
-    super.initState();
-    _nameController = TextEditingController(text: widget.name);
-    _phoneController = TextEditingController(text: widget.phone);
-    _dateController = TextEditingController(text: widget.date);
-    _carNumberController = TextEditingController(text: widget.carnumber);
-    _carModelController = TextEditingController(text: widget.carmodel);
-    _amountController = TextEditingController(text: widget.amount);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    _nameController = TextEditingController(text: name);
+    _phoneController = TextEditingController(text: phone);
+
+    Future.delayed(Duration.zero, () {
+      Provider.of<DateProvider>(context, listen: false).DateSetter(date);
+    });
+    _carNumberController = TextEditingController(text: carnumber);
+    _carModelController = TextEditingController(text: carmodel);
+    _amountController = TextEditingController(text: amount);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -118,7 +113,8 @@ class _EditScreenState extends State<EditScreen> {
                   const SizedBox(height: 10),
                   InkWell(
                     onTap: () {
-                      _showDatePicker(context);
+                      Provider.of<DateProvider>(context, listen: false)
+                          .showDatePickers(context);
                     },
                     child: IgnorePointer(
                       child: editcustomer(
@@ -166,22 +162,6 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
-  void _showDatePicker(BuildContext context) async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2040),
-    );
-
-    if (pickedDate != null) {
-      setState(() {
-        _selectedDate = pickedDate;
-        _dateController.text = DateFormat("MM/dd/yyyy").format(pickedDate);
-      });
-    }
-  }
-
   TextFormField editcustomer({
     required String text1,
     required TextEditingController controller,
@@ -212,10 +192,13 @@ class _EditScreenState extends State<EditScreen> {
   }
 
   editCustomerButton(BuildContext context) async {
-    final db = Provider.of<DbProvider>(context);
+    final db = Provider.of<DbProvider>(context, listen: false);
     final name1 = _nameController.text.trim();
     final phone1 = _phoneController.text.trim();
-    final date1 = _dateController.text.trim();
+    final date1 = Provider.of<DateProvider>(context, listen: false)
+        .fromDateContoller
+        .text
+        .trim();
     final carNo1 = _carNumberController.text.trim();
     final carModel1 = _carModelController.text.trim();
     final amount1 = _amountController.text.trim();
@@ -224,9 +207,8 @@ class _EditScreenState extends State<EditScreen> {
         phone1.isEmpty ||
         date1.isEmpty ||
         carNo1.isEmpty ||
-        carModel1.isEmpty||
-        amount1.isEmpty
-        ) {
+        carModel1.isEmpty ||
+        amount1.isEmpty) {
       return;
     }
 
@@ -237,9 +219,8 @@ class _EditScreenState extends State<EditScreen> {
       carNumber: carNo1,
       carModel: carModel1,
       amount: amount1,
-      
     );
-    db.editCustomer(widget.index, update);
+    db.editCustomer(index, update);
     Navigator.of(context).pop(MaterialPageRoute(
       builder: (context) => const ListPage(),
     ));
