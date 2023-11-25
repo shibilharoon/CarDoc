@@ -10,7 +10,7 @@ class BottomBar extends StatelessWidget {
   BottomBar({super.key});
 
   void navigateBottomBar(BuildContext context, int index) {
-    Provider.of<pageProvider>(context, listen: false).navigateBottomBar(index);
+    Provider.of<PageProvider>(context, listen: false).navigateBottomBar(index);
   }
 
   final List<Widget> _screens = [
@@ -24,16 +24,16 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
-          index: Provider.of<pageProvider>(context, listen: true).selectedIndex,
+          index: Provider.of<PageProvider>(context, listen: true).selectedIndex,
           children: _screens),
       bottomNavigationBar: Container(
-        child: Consumer(
+        child: Consumer<PageProvider>(
           builder: (context, value, child) {
             return BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
               selectedItemColor: const Color.fromARGB(255, 107, 14, 14),
               unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
-              currentIndex: Provider.of<pageProvider>(context, listen: false)
+              currentIndex: value
                   .selectedIndex,
               backgroundColor: Colors.white,
               onTap: (index) => navigateBottomBar(context, index),

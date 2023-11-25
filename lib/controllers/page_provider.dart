@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class pageProvider extends ChangeNotifier {
+class PageProvider extends ChangeNotifier {
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
   navigateBottomBar(int index) {

@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => DbProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => pageProvider(),
+          create: (context) => PageProvider(),
         ),
         ChangeNotifierProvider(create: (context) => DateProvider(),)
       ],

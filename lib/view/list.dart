@@ -121,9 +121,8 @@ class _ListPageState extends State<ListPage> {
             ),
           ),
           Flexible(
-            child: Consumer(
-              builder: (context, value, child) {
-                return ListView.separated(
+            child: 
+                ListView.separated(
                   itemBuilder: (ctx, index) {
                     final data = db.filteredCustomerList.isNotEmpty
                         ? db.filteredCustomerList[index]
@@ -215,9 +214,9 @@ class _ListPageState extends State<ListPage> {
                   itemCount: db.filteredCustomerList.isNotEmpty
                       ? db.filteredCustomerList.length
                       : db.customerList.length,
-                );
-              },
-            ),
+                )
+              
+            
           ),
         ],
       ),
